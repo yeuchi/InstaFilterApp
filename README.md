@@ -9,7 +9,7 @@ Course: iOS App Development Basics with Professor Parham Aarabi. https://www.cou
 Forum https://www.coursera.org/learn/ios-app-development-basics/discussions
 
 ## Insta Filter project (Week 1 - 3)
-Application offer 2 image processing features below.
+Application offers below image processing features.
 
 #### Red Highlight
 Source code implementation from course tutorial by Jack Wu and Professor Aarabi.
