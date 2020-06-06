@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     @IBOutlet var filterList: UIView!
     var myRGBA:RGBAImage? = nil
     var image:UIImage?=nil
+    var btnSelected:UIButton?=nil
     
     @IBOutlet weak var btnConvolve: UIButton!
     @IBOutlet weak var btnHighlight: UIButton!
@@ -30,37 +31,41 @@ class ViewController: UIViewController {
 /*
  * Convolution button click event
  */
-    @IBAction func onClickIdentity(_ sender: UIButton) {
-        var filter = FilterParams()
-        filter.effectLevel = EffectLevel.small
-        filter.listKernel.append(KernelType.identity)
+    @IBAction func onClickIdentity(sender: UIButton) {
+        let filter = selectButton(sender: sender, type:KernelType.identity)
         runInstaFilter(params: filter)
     }
     @IBAction func onClickSobelX(_ sender: UIButton) {
-        var filter = FilterParams()
-        filter.effectLevel = EffectLevel.small
-        filter.listKernel.append(KernelType.xSobel)
+        let filter = selectButton(sender: sender, type:KernelType.xSobel)
         runInstaFilter(params: filter)
     }
     @IBAction func onClickSobelY(_ sender: UIButton) {
-        var filter = FilterParams()
-        filter.effectLevel = EffectLevel.small
-        filter.listKernel.append(KernelType.ySobel)
+        let filter = selectButton(sender: sender, type:KernelType.ySobel)
         runInstaFilter(params: filter)
     }
     
     @IBAction func onClickSharpen(_ sender: UIButton) {
-        var filter = FilterParams()
-        filter.effectLevel = EffectLevel.small
-        filter.listKernel.append(KernelType.sharpen)
+        let filter = selectButton(sender: sender, type:KernelType.sharpen)
         runInstaFilter(params: filter)
     }
     
     @IBAction func onClickBlur(_ sender: UIButton) {
+        let filter = selectButton(sender: sender, type:KernelType.blur)
+        runInstaFilter(params: filter)
+    }
+    
+    func selectButton(sender:UIButton, type:KernelType) -> FilterParams {
+        if(btnSelected != nil) {
+            btnSelected?.isSelected = false
+        }
+        
+        btnSelected = sender
+        sender.isSelected = true
+        
         var filter = FilterParams()
         filter.effectLevel = EffectLevel.small
-        filter.listKernel.append(KernelType.blur)
-        runInstaFilter(params: filter)
+        filter.listKernel.append(type)
+        return filter
     }
     
     @IBAction func onHighlight(_ sender: UIButton) {
