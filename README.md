@@ -17,7 +17,7 @@ It has been updated from Swift 2 to Swift 5.1 to be compatible with MacOS Catali
 
 #### Convolution
 Source code implementation by 'yours-truly'; taught by Dr. Rao, Imaging Science professor at Rochester Institute of Technology.  
-<img width="220" alt="Screen Shot 2020-06-04 at 3 11 12 PM" src="https://user-images.githubusercontent.com/1282659/83807952-7a388700-a679-11ea-8cd9-e0aa0b56cfad.png">
+<img width="220" alt="highlight" src="https://user-images.githubusercontent.com/1282659/83954808-1b5a4580-a812-11ea-9d6c-3107c93ff285.png"> <img width="220" alt="convolve" src="https://user-images.githubusercontent.com/1282659/83954809-1e553600-a812-11ea-8934-9b277f85fa9d.png">
 
 ## IDE
 XCode 11.5 Swift 5.1
