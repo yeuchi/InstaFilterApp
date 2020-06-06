@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,7 +12,7 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="InstaFilterApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Source" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbv-gH-frt">
@@ -55,14 +55,75 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="btnBlur" destination="Kqj-2T-C9z" id="swf-hb-2Gn"/>
                         <outlet property="btnConvolve" destination="19h-jJ-OiS" id="USg-Yj-cvL"/>
                         <outlet property="btnHighlight" destination="0iB-3K-mac" id="d1E-vc-Kq4"/>
+                        <outlet property="btnIdentity" destination="VRw-V0-uFJ" id="hyA-gj-WCn"/>
+                        <outlet property="btnSharpen" destination="rfi-t9-UTH" id="Y2b-Ec-ZLe"/>
+                        <outlet property="btnSobelX" destination="2Fm-gM-ukC" id="xoC-IX-WwP"/>
+                        <outlet property="btnSobelY" destination="Hsf-nA-cF7" id="O9a-V9-g7F"/>
+                        <outlet property="filterList" destination="vJ0-qO-ZHD" id="SVX-2R-VlX"/>
+                        <outlet property="filtersView" destination="vJ0-qO-ZHD" id="FbY-iC-bfp"/>
                         <outlet property="imageViewConvolve" destination="MBT-8e-LMM" id="oSH-9R-NCc"/>
                         <outlet property="imageViewHighlight" destination="yqx-5S-tdj" id="yz9-Ia-9Ab"/>
                         <outlet property="imageViewSource" destination="6oY-5h-7HD" id="h4A-aq-fKb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="vJ0-qO-ZHD">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="c7T-ri-Cvh">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VRw-V0-uFJ">
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="25.5"/>
+                                    <state key="normal" title="Identity"/>
+                                    <connections>
+                                        <action selector="onClickIdentity:" destination="BYZ-38-t0r" eventType="touchUpInside" id="smo-mW-KXi"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Fm-gM-ukC">
+                                    <rect key="frame" x="0.0" y="25.5" width="240" height="25.5"/>
+                                    <state key="normal" title="Sobel X"/>
+                                    <connections>
+                                        <action selector="onClickSobelX:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VEF-4Z-YyY"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hsf-nA-cF7">
+                                    <rect key="frame" x="0.0" y="51" width="240" height="26"/>
+                                    <state key="normal" title="Sobel Y"/>
+                                    <connections>
+                                        <action selector="onClickSobelY:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6On-Ud-hTn"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rfi-t9-UTH">
+                                    <rect key="frame" x="0.0" y="77" width="240" height="25.5"/>
+                                    <state key="normal" title="Sharpen"/>
+                                    <connections>
+                                        <action selector="onClickSharpen:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oL5-88-NLk"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kqj-2T-C9z">
+                                    <rect key="frame" x="0.0" y="102.5" width="240" height="25.5"/>
+                                    <state key="normal" title="Blur"/>
+                                    <connections>
+                                        <action selector="onClickBlur:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tZ5-qS-pyQ"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstItem="c7T-ri-Cvh" firstAttribute="leading" secondItem="WzN-oR-327" secondAttribute="leading" id="XuU-Yo-1AD"/>
+                        <constraint firstItem="c7T-ri-Cvh" firstAttribute="top" secondItem="vJ0-qO-ZHD" secondAttribute="top" id="egd-fU-XNR"/>
+                        <constraint firstAttribute="bottom" secondItem="c7T-ri-Cvh" secondAttribute="bottom" id="oQu-ZV-y8r"/>
+                        <constraint firstItem="WzN-oR-327" firstAttribute="trailing" secondItem="c7T-ri-Cvh" secondAttribute="trailing" id="qq0-No-f5z"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="WzN-oR-327"/>
+                </view>
             </objects>
             <point key="canvasLocation" x="139" y="127"/>
         </scene>

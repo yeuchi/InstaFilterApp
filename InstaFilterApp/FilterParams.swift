@@ -43,7 +43,7 @@ struct FilterParams {
         *
         * Are there parameters for each filter formula that can change the intensity of the effect of the filter? Maximum of 3 pts
         */
-       var listKernel:[KernelType] = [KernelType.identity]
+       var listKernel:[KernelType] = []
        var effectLevel:EffectLevel = EffectLevel.small
        
        /*

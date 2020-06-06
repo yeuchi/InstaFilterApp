@@ -9,7 +9,15 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    @IBOutlet weak var btnIdentity: UIButton!
+    @IBOutlet weak var btnSobelX: UIButton!
+    @IBOutlet weak var btnSobelY: UIButton!
+    
+    @IBOutlet weak var btnBlur: UIButton!
+    @IBOutlet weak var btnSharpen: UIButton!
+    
+    @IBOutlet var filtersView: UIView!
+    @IBOutlet var filterList: UIView!
     var myRGBA:RGBAImage? = nil
     var image:UIImage?=nil
     
@@ -19,6 +27,41 @@ class ViewController: UIViewController {
     @IBOutlet weak var imageViewHighlight: UIImageView!
     @IBOutlet weak var imageViewConvolve: UIImageView!
     
+/*
+ * Convolution button click event
+ */
+    @IBAction func onClickIdentity(_ sender: UIButton) {
+        var filter = FilterParams()
+        filter.effectLevel = EffectLevel.small
+        filter.listKernel.append(KernelType.identity)
+        runInstaFilter(params: filter)
+    }
+    @IBAction func onClickSobelX(_ sender: UIButton) {
+        var filter = FilterParams()
+        filter.effectLevel = EffectLevel.small
+        filter.listKernel.append(KernelType.xSobel)
+        runInstaFilter(params: filter)
+    }
+    @IBAction func onClickSobelY(_ sender: UIButton) {
+        var filter = FilterParams()
+        filter.effectLevel = EffectLevel.small
+        filter.listKernel.append(KernelType.ySobel)
+        runInstaFilter(params: filter)
+    }
+    
+    @IBAction func onClickSharpen(_ sender: UIButton) {
+        var filter = FilterParams()
+        filter.effectLevel = EffectLevel.small
+        filter.listKernel.append(KernelType.sharpen)
+        runInstaFilter(params: filter)
+    }
+    
+    @IBAction func onClickBlur(_ sender: UIButton) {
+        var filter = FilterParams()
+        filter.effectLevel = EffectLevel.small
+        filter.listKernel.append(KernelType.blur)
+        runInstaFilter(params: filter)
+    }
     
     @IBAction func onHighlight(_ sender: UIButton) {
         btnHighlight.isSelected = true
@@ -26,14 +69,46 @@ class ViewController: UIViewController {
     }
     
     @IBAction func onConvolve(_ sender: UIButton) {
-        btnConvolve.isSelected = true
-        runInstaFilter()
+        if(sender.isSelected) {
+            hideDialog()
+            sender.isSelected = false
+        }
+        else {
+            sender.isSelected = true
+            showDialog()
+        }
+        
+    }
+    
+    func showDialog() {
+        view.addSubview(filtersView)
+               
+         let topAnchor = filtersView.topAnchor.constraint(equalTo: imageViewHighlight.topAnchor)
+         
+         let leftConstraint = filtersView.leftAnchor.constraint(equalTo: view.leftAnchor)
+         
+         let rightConstraint = filtersView.rightAnchor.constraint(equalTo: view.rightAnchor)
+         
+         let heightConstraint = filtersView.heightAnchor.constraint(lessThanOrEqualToConstant: 100)
+         
+         NSLayoutConstraint.activate([leftConstraint, rightConstraint, topAnchor])
+        
+         view.layoutIfNeeded()
+    }
+    
+    func hideDialog() {
+        filtersView.removeFromSuperview()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.image = UIImage(named: "sample")
         imageViewSource.image = self.image
+        
+        // dialog
+        filtersView.backgroundColor = UIColor.lightGray
+        filtersView.translatesAutoresizingMaskIntoConstraints = false
+        
     }
     
     func runRedHighlight() {
@@ -91,7 +166,7 @@ class ViewController: UIViewController {
             imageViewHighlight.image = redImage
         }
             
-        func runInstaFilter() {
+    func runInstaFilter(params:FilterParams) {
             
             self.myRGBA = RGBAImage(image:self.image!)!
             
@@ -107,12 +182,7 @@ class ViewController: UIViewController {
              * User may add N arbitrary kernels (filters) below.
              * User may edit effect level below
              */
-            var params = FilterParams()
-            params.effectLevel = EffectLevel.small
-            params.listKernel.append(KernelType.sharpen)
-            //params.listKernel.append(KernelType.blur)
-            //params.listKernel.append(KernelType.xSobel)
-            //params.listKernel.append(KernelType.ySoble)
+
 
             for k in 0..<params.listKernel.count {
                 
