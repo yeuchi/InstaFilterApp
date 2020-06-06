@@ -75,17 +75,16 @@ class ViewController: UIViewController {
     
     @IBAction func onConvolve(_ sender: UIButton) {
         if(sender.isSelected) {
-            hideDialog()
+            hideFilterList()
             sender.isSelected = false
         }
         else {
             sender.isSelected = true
-            showDialog()
+            showFilterList()
         }
-        
     }
     
-    func showDialog() {
+    func showFilterList() {
         view.addSubview(filtersView)
                
          let topAnchor = filtersView.topAnchor.constraint(equalTo: imageViewHighlight.topAnchor)
@@ -99,10 +98,21 @@ class ViewController: UIViewController {
          NSLayoutConstraint.activate([leftConstraint, rightConstraint, topAnchor])
         
          view.layoutIfNeeded()
+        
+        filtersView.alpha = 0
+        UIView.animate(withDuration: 1) {
+            self.filtersView.alpha = 1
+        }
     }
     
-    func hideDialog() {
-        filtersView.removeFromSuperview()
+    func hideFilterList() {
+        UIView.animate(withDuration: 1, animations: {
+            self.filtersView.alpha = 0
+        }) {completed in
+            if completed == true {
+                self.filtersView.removeFromSuperview()
+            }
+        }
     }
     
     override func viewDidLoad() {
