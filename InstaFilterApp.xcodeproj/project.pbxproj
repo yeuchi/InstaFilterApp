@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D886B2A4248D5D5500B7AEBC /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D886B2A3248D5D5500B7AEBC /* TableViewController.swift */; };
 		D8C859B12489902700402B2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C859B02489902700402B2F /* AppDelegate.swift */; };
 		D8C859B32489902700402B2F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C859B22489902700402B2F /* SceneDelegate.swift */; };
 		D8C859B52489902700402B2F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C859B42489902700402B2F /* ViewController.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D886B2A3248D5D5500B7AEBC /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		D8C859AD2489902700402B2F /* InstaFilterApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstaFilterApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8C859B02489902700402B2F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D8C859B22489902700402B2F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				D8C859B92489902800402B2F /* Assets.xcassets */,
 				D8C859BB2489902800402B2F /* LaunchScreen.storyboard */,
 				D8C859BE2489902800402B2F /* Info.plist */,
+				D886B2A3248D5D5500B7AEBC /* TableViewController.swift */,
 			);
 			path = InstaFilterApp;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8C859B52489902700402B2F /* ViewController.swift in Sources */,
+				D886B2A4248D5D5500B7AEBC /* TableViewController.swift in Sources */,
 				D8C859E1248990A800402B2F /* RGBAImage.swift in Sources */,
 				D8C859B12489902700402B2F /* AppDelegate.swift in Sources */,
 				D8C859B32489902700402B2F /* SceneDelegate.swift in Sources */,

@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
     @IBOutlet weak var btnIdentity: UIButton!
     @IBOutlet weak var btnSobelX: UIButton!
     @IBOutlet weak var btnSobelY: UIButton!
@@ -27,6 +28,65 @@ class ViewController: UIViewController {
     @IBOutlet weak var imageViewSource: UIImageView!
     @IBOutlet weak var imageViewHighlight: UIImageView!
     @IBOutlet weak var imageViewConvolve: UIImageView!
+   
+    /*
+     * User clicks on button - share
+     */
+    @IBAction func onShare(_ sender: Any) {
+        let activityController = UIActivityViewController(activityItems: [imageViewConvolve.image!], applicationActivities: nil)
+        
+        present(activityController, animated: true)
+    }
+    
+    /*
+     * User clicks on button - new photo
+     */
+    @IBAction func onNewPhoto(_ sender: Any) {
+        
+        let actionSheet = UIAlertController(title: "New Photo", message: nil, preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title:"Camera", style: .default, handler: {action in
+            self.showCamera()
+        }))
+        
+        
+        actionSheet.addAction(UIAlertAction(title:"Album", style: .default, handler: {action in
+            self.showAlbum()
+        }))
+        
+        
+        actionSheet.addAction(UIAlertAction(title:"Cancel", style: .cancel, handler: {action in
+            
+        }))
+        
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func showCamera() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        picker.sourceType = .camera
+        present(picker, animated: true)
+    }
+    
+    func showAlbum() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        picker.sourceType = .photoLibrary
+        present(picker, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        dismiss(animated: true, completion: nil)
+        let image = info[UIImagePickerController.InfoKey.originalImage]
+        imageViewSource.image = image as! UIImage
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
     
 /*
  * Convolution button click event
@@ -128,7 +188,7 @@ class ViewController: UIViewController {
     
     func runRedHighlight() {
             // Process the image!
-            self.myRGBA = RGBAImage(image:self.image!)!
+            self.myRGBA = RGBAImage(image:imageViewSource.image!)!
             
             let x=10
             let y=10
@@ -183,7 +243,7 @@ class ViewController: UIViewController {
             
     func runInstaFilter(params:FilterParams) {
             
-            self.myRGBA = RGBAImage(image:self.image!)!
+            self.myRGBA = RGBAImage(image:imageViewSource.image!)!
             
             /*
              * STEP 5: Apply predefined filters
